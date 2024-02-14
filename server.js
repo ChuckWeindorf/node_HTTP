@@ -29,12 +29,6 @@ const serverCW = httpCW.createServer((reqCW, resCW) =>
                     `<p>If the Pirates win the series, Chuck will give Hunter $1</p>` +
                     `<p>Notarized on: 2/13/2024</p></body></html>`);
               }
-            else if (url == "/about") 
-              {
-                resCW.write(`<html><body><h1>Chuck Bio</h1>` + 
-                `<p>In one season, Chuck played all softball positions except pitcher</p>` +
-                `</body></html>`);
-              }
            }   
          else if (method == "POST") 
            {
@@ -44,9 +38,12 @@ const serverCW = httpCW.createServer((reqCW, resCW) =>
                 let bodyCW = Buffer.concat(arrChunkCW).toString();
                 const responseDataCW = { "method": method, "url": url, "body": bodyCW}
                 resCW.write(JSON.stringify(responseDataCW))
-}
-           }
-
+              }
+              else if (url == "/about") 
+              {
+                resCW.write(JSON.stringify({name: "Chuck", position: "Catcher", LastYear: 2015}));
+              }
+            }
         //all things must come to an end
         resCW.end();
        })//END REQUEST
