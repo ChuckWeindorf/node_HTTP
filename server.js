@@ -36,7 +36,7 @@ const serverCW = httpCW.createServer((reqCW, resCW) =>
             if (url == "/echo")
               { 
                 let bodyCW = Buffer.concat(arrChunkCW).toString();
-                const responseDataCW = { "method": method, "url": url, "body": bodyCW}
+                const responseDataCW = { "method": method, "url": url, "body": JSON.parse(bodyCW)}
                 resCW.write(JSON.stringify(responseDataCW))
               }
               else if (url == "/about") 
